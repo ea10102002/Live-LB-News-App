@@ -1,0 +1,168 @@
+package com.usj.news_application.views
+
+import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.usj.news_application.R
+import com.usj.news_application.viewmodels.SignUpViewModel
+import java.util.*
+import java.util.regex.Pattern
+
+class SignUpActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: SignUpViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
+
+        val etFirstName = findViewById<EditText>(R.id.etFirstName)
+        val etLastName = findViewById<EditText>(R.id.etLastName)
+        val etEmail = findViewById<EditText>(R.id.etEmailSignUp)
+        val etPassword = findViewById<EditText>(R.id.etPasswordSignUp)
+        val etBirthDate = findViewById<EditText>(R.id.etBirthDate)
+        val btnSignUp = findViewById<Button>(R.id.btnSignUp)
+        val btnGoToLogin = findViewById<Button>(R.id.btnGoToLogin)
+
+        btnGoToLogin.setOnClickListener {
+            finish()
+        }
+
+        viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
+
+        etBirthDate.addTextChangedListener(object : TextWatcher {
+            private var isEditing = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (isEditing) return
+
+                isEditing = true
+                val input = s.toString()
+                val formatted = formatBirthDateDdMmYyyy(input)
+                etBirthDate.setText(formatted)
+                etBirthDate.setSelection(formatted.length)
+                isEditing = false
+            }
+
+            private fun formatBirthDateDdMmYyyy(input: String): String {
+                val digitsOnly = input.filter { it.isDigit() }.take(8)
+                val sb = StringBuilder()
+
+                for (i in digitsOnly.indices) {
+                    when (i) {
+                        0, 1 -> sb.append(digitsOnly[i])
+                        2 -> sb.append("/").append(digitsOnly[i])
+                        3 -> sb.append(digitsOnly[i])
+                        4 -> sb.append("/").append(digitsOnly[i])
+                        5, 6, 7 -> sb.append(digitsOnly[i])
+                    }
+                }
+                return sb.toString()
+            }
+        })
+
+        btnSignUp.setOnClickListener {
+            val firstName = etFirstName.text.toString().trim()
+            val lastName = etLastName.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+            val birthdate = etBirthDate.text.toString().trim()
+
+            if (!validateInputs(firstName, lastName, email, password, birthdate)) {
+                return@setOnClickListener
+            }
+
+            if (viewModel.registerUser(this, firstName, lastName, email, password, birthdate)) {
+                val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
+                sharedPreferences.edit()
+                    .putString("loggedInEmail", email)
+                    .putBoolean("isAdmin", false)
+                    .apply()
+
+                Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_SHORT).show()
+
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Failed to create account. Email might already exist.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun validateInputs(
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String,
+        birthdate: String
+    ): Boolean {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || birthdate.isEmpty()) {
+            Toast.makeText(this, "All fields are required.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!Pattern.matches("^[a-zA-Z]+$", firstName)) {
+            Toast.makeText(this, "First Name should contain only letters.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!Pattern.matches("^[a-zA-Z]+$", lastName)) {
+            Toast.makeText(this, "Last Name should contain only letters.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!validateEmail(email)) {
+            Toast.makeText(this, "Email must end with @gmail.com or @hotmail.com.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (password.length < 8) {
+            Toast.makeText(this, "Password should be at least 8 characters long.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!validateBirthDateDdMmYyyy(birthdate)) {
+            Toast.makeText(this, "Invalid birthdate (use DD/MM/YYYY) or too young (must be 15+).", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        val emailRegex = "^[a-zA-Z0-9._%+-]+@(gmail|hotmail)\\.com$"
+        return Pattern.matches(emailRegex, email)
+    }
+
+    private fun validateBirthDateDdMmYyyy(birthdate: String): Boolean {
+        val regex = "\\d{2}/\\d{2}/\\d{4}"
+        if (!Pattern.matches(regex, birthdate)) {
+            return false
+        }
+
+        val parts = birthdate.split("/")
+        val day = parts[0].toIntOrNull() ?: return false
+        val month = parts[1].toIntOrNull() ?: return false
+        val year = parts[2].toIntOrNull() ?: return false
+
+        if (year < 1925 || month !in 1..12 || day !in 1..31) {
+            return false
+        }
+
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        if (currentYear - year < 15) {
+            return false
+        }
+
+        return true
+    }
+}

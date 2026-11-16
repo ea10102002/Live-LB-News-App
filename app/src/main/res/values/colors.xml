@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#C62828</color>
+    <color name="primaryLightColor">#FF5F52</color>
+    <color name="primaryDarkColor">#8E0000</color>
+    <color name="secondaryColor">#0F172A</color>
+    <color name="accentBlue">#0277BD</color>
+
+    <color name="primaryTextColor">#0F172A</color>
+    <color name="secondaryTextColor">#64748B</color>
+    <color name="backgroundColor">#F4F6F9</color>
+    <color name="surfaceColor">#FFFFFF</color>
+    <color name="cardStrokeColor">#E2E8F0</color>
+    <color name="dividerColor">#E2E8F0</color>
+    <color name="errorColor">#D32F2F</color>
+
+    <color name="lbciBadgeBg">#D32F2F</color>
+    <color name="mtvBadgeBg">#0277BD</color>
+    <color name="intlBadgeBg">#334155</color>
+    <color name="strikeAlertBg">#FFEBEE</color>
+    <color name="strikeAlertText">#B71C1C</color>
+    <color name="aiAccentBg">#EEF2FF</color>
+    <color name="aiAccentText">#3730A3</color>
+
+    <color name="primary_text_color">@color/primaryTextColor</color>
+    <color name="secondary_text_color">@color/secondaryTextColor</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

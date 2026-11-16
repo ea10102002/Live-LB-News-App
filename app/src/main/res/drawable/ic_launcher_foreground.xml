@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Radar Ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#66FFFFFF"
+        android:strokeWidth="2.5"
+        android:pathData="M54,28C39.64,28 28,39.64 28,54s11.64,26 26,26 26,-11.64 26,-26S68.36,28 54,28z" />
+    <!-- Location Pin -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,32c-8.28,0 -15,6.72 -15,15 0,10.5 15,26 15,26s15,-15.5 15,-26c0,-8.28 -6.72,-15 -15,-15zM54,52.5c-3.04,0 -5.5,-2.46 -5.5,-5.5s2.46,-5.5 5.5,-5.5 5.5,2.46 5.5,5.5 -2.46,5.5 -5.5,5.5z" />
+    <!-- Live Yellow Beacon -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:pathData="M72,34a4.5,4.5 0,1 0,0 9a4.5,4.5 0,1 0,0 -9z" />
+</vector>

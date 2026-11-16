@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Outer Crimson Shield/Circle -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M32,4C16.536,4 4,16.536 4,32s12.536,28 28,28 28,-12.536 28,-28S47.464,4 32,4z" />
+    <!-- Inner Radar Ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#4DFFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M32,12C20.954,12 12,20.954 12,32s8.954,20 20,20 20,-8.954 20,-20S43.046,12 32,12z" />
+    <!-- Globe Latitude/Longitude Lines -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#80FFFFFF"
+        android:strokeWidth="1.8"
+        android:pathData="M12,32h40M32,12v40M16,22h32M16,42h32" />
+    <!-- Center Location Pin / Pulse -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,17c-6.075,0 -11,4.925 -11,11 0,7.7 11,19 11,19s11,-11.3 11,-19c0,-6.075 -4.925,-11 -11,-11zM32,32c-2.209,0 -4,-1.791 -4,-4s1.791,-4 4,-4 4,1.791 4,4 -1.791,4 -4,4z" />
+    <!-- Live Red Broadcast Dot in Pin Center -->
+    <path
+        android:fillColor="#FF1744"
+        android:pathData="M32,25.5a2.5,2.5 0,1 0,0 5a2.5,2.5 0,1 0,0 -5z" />
+    <!-- Live Pulse Dot Top-Right -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:pathData="M48,16a4,4 0,1 0,0 8a4,4 0,1 0,0 -8z" />
+</vector>

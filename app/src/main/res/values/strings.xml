@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Live.LB</string>
+    <string name="app_tagline">Lebanon &amp; World News • Live Strike Tracker</string>
+    <string name="news_page_name">News</string>
+    <string name="login_page_name">Login</string>
+    <string name="signup_page_name">Sign Up</string>
+    <string name="account_info_page_name">Account Info</string>
+    <string name="admin_dashboard_page_name">Admin Dashboard</string>
+    <string name="edit_user_info_page_name">Edit User Info</string>
+    <string name="user_info">User Info</string>
+    <string name="map">Strike Map</string>
+    <string name="admin_dashboard">Admin Dashboard</string>
+
+    <!-- News Tabs -->
+    <string name="tab_lebanon">All Lebanon</string>
+    <string name="tab_lbci">LBCI</string>
+    <string name="tab_mtv">MTV Lebanon</string>
+    <string name="tab_international">International</string>
+    <string name="tab_saved">Saved 🔖</string>
+    <string name="tab_south">South Lebanon</string>
+
+    <!-- AI & Actions -->
+    <string name="translate_with_ai">✨ Translate with Gemini AI (EN ↔ AR)</string>
+    <string name="translating_ai">✨ Gemini AI is translating...</string>
+    <string name="show_original">↩ Show Original Text</string>
+    <string name="strike_on_map_badge">🚨 STRIKE MAPPED</string>
+</resources>
